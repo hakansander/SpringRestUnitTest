@@ -1,0 +1,9 @@
+{
+  "InvoiceQueryResponse": {
+    "Header": {
+      "statusCode": "204",
+      "response": "No data found"
+    },
+    "Body": null
+  }
+}
