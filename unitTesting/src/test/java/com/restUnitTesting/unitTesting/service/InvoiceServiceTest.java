@@ -3,6 +3,7 @@ package com.restUnitTesting.unitTesting.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.restUnitTesting.unitTesting.model.InvoiceQuery.InvoiceQueryInfo;
 import com.restUnitTesting.unitTesting.service.imp.InvoiceServiceImp;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,12 @@ public class InvoiceServiceTest {
         responseInvoiceResponseEntity = mockService.getInvoiceInfo(mockPhoneNum);
         mockServer.verify();
 
+        Assert.assertEquals("200",
+                responseInvoiceResponseEntity.
+                        getInvoiceQueryResponse().
+                        getHeader().
+                        getStatusCode());
+
     }
 
     @Test
@@ -86,6 +93,7 @@ public class InvoiceServiceTest {
         responseInvoiceResponseEntity = mockService.getInvoiceInfo(mockPhoneNum);
         mockServer.verify();
 
+        Assert.assertEquals("204", responseInvoiceResponseEntity.getInvoiceQueryResponse().getHeader().getStatusCode());
     }
 
 }

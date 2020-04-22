@@ -12,6 +12,16 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class InvoiceQueryInfo {
 
     @JsonProperty("InvoiceQueryResponse")
-    public InvoiceQueryResponse invoiceQueryResponse;
+    private InvoiceQueryResponse invoiceQueryResponse;
+
+    @JsonProperty("InvoiceQueryResponse")
+    public InvoiceQueryResponse getInvoiceQueryResponse() {
+        return invoiceQueryResponse;
+    }
+
+    @JsonProperty("InvoiceQueryResponse")
+    public void setInvoiceQueryResponse(InvoiceQueryResponse invoiceQueryResponse) {
+        this.invoiceQueryResponse = invoiceQueryResponse;
+    }
 
 }

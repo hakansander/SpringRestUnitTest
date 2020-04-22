@@ -12,6 +12,16 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Body {
 
     @JsonProperty("Response")
-    public Response response;
+    private Response response;
+
+    @JsonProperty("Response")
+    public Response getResponse() {
+        return response;
+    }
+
+    @JsonProperty("Response")
+    public void setResponse(Response response) {
+        this.response = response;
+    }
 
 }

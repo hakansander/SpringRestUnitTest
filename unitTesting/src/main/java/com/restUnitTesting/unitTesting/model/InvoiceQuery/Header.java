@@ -13,8 +13,28 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Header {
 
     @JsonProperty("statusCode")
-    public String statusCode;
+    private String statusCode;
     @JsonProperty("response")
-    public String response;
+    private String response;
+
+    @JsonProperty("statusCode")
+    public String getStatusCode() {
+        return statusCode;
+    }
+
+    @JsonProperty("statusCode")
+    public void setStatusCode(String statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    @JsonProperty("response")
+    public String getResponse() {
+        return response;
+    }
+
+    @JsonProperty("response")
+    public void setResponse(String response) {
+        this.response = response;
+    }
 
 }

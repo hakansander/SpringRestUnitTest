@@ -13,8 +13,28 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class InvoiceQueryResponse {
 
     @JsonProperty("Header")
-    public Header header;
+    private Header header;
     @JsonProperty("Body")
-    public Body body;
+    private Body body;
+
+    @JsonProperty("Header")
+    public Header getHeader() {
+        return header;
+    }
+
+    @JsonProperty("Header")
+    public void setHeader(Header header) {
+        this.header = header;
+    }
+
+    @JsonProperty("Body")
+    public Body getBody() {
+        return body;
+    }
+
+    @JsonProperty("Body")
+    public void setBody(Body body) {
+        this.body = body;
+    }
 
 }

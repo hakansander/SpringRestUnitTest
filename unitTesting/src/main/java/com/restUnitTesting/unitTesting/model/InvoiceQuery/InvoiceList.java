@@ -15,12 +15,52 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class InvoiceList {
 
     @JsonProperty("Id")
-    public String id;
+    private String id;
     @JsonProperty("Name")
-    public String name;
+    private String name;
     @JsonProperty("Price")
-    public String price;
+    private String price;
     @JsonProperty("Currency")
-    public String currency;
+    private String currency;
+
+    @JsonProperty("Id")
+    public String getId() {
+        return id;
+    }
+
+    @JsonProperty("Id")
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @JsonProperty("Name")
+    public String getName() {
+        return name;
+    }
+
+    @JsonProperty("Name")
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @JsonProperty("Price")
+    public String getPrice() {
+        return price;
+    }
+
+    @JsonProperty("Price")
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    @JsonProperty("Currency")
+    public String getCurrency() {
+        return currency;
+    }
+
+    @JsonProperty("Currency")
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
 
 }

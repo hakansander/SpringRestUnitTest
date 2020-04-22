@@ -13,6 +13,16 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Response {
 
     @JsonProperty("InvoiceList")
-    public List<InvoiceList> invoiceList = null;
+    private List<InvoiceList> invoiceList = null;
+
+    @JsonProperty("InvoiceList")
+    public List<InvoiceList> getInvoiceList() {
+        return invoiceList;
+    }
+
+    @JsonProperty("InvoiceList")
+    public void setInvoiceList(List<InvoiceList> invoiceList) {
+        this.invoiceList = invoiceList;
+    }
 
 }
