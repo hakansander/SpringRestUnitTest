@@ -28,14 +28,6 @@ public class InvoiceServiceImp implements InvoiceService {
             MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
             HttpHeaders requestHeaders = new HttpHeaders();
 
-            final String uuid = UUID.randomUUID().toString();
-            requestHeaders.add("RequestId", uuid);
-            requestHeaders.add("Credentials.ApplicationId", "Zeus");
-            requestHeaders.add("Credentials.User", "ZeusNoName");
-            requestHeaders.add("SourceSystem", "ZEUS");
-            requestHeaders.add("Content-Type", "application/json");
-            requestHeaders.add("ConversationId", "ZEUS_" + uuid);
-
             HttpEntity<?> httpEntity = new HttpEntity<>(body, requestHeaders);
             requestHeaders.setContentType(MediaType.APPLICATION_JSON);
 
