@@ -21,7 +21,7 @@ public class InvoiceController {
     }
 
     @GetMapping("invoiceQuery/{phoneNumber}")
-    public ClientResponse getBillingInquiry(@PathVariable("phoneNumber") String phoneNumber) {
+    public ClientResponse getInvoiceInfo(@PathVariable("phoneNumber") String phoneNumber) {
 
     	InvoiceQueryInfo invoiceQueryInfo = invoiceService.getInvoiceInfo(phoneNumber);
 
