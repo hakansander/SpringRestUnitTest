@@ -3,6 +3,6 @@ import com.restUnitTesting.unitTesting.model.InvoiceQuery.*;
 
 public interface InvoiceService {
 
-    InvoiceQueryInfo getInvoiceInfo(String phoneNumber);
+    InvoiceResponse getInvoiceInfo(String phoneNumber);
 
 }

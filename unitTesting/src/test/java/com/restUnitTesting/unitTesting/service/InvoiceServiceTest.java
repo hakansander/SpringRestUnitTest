@@ -1,7 +1,7 @@
 package com.restUnitTesting.unitTesting.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.restUnitTesting.unitTesting.model.InvoiceQuery.InvoiceQueryInfo;
+import com.restUnitTesting.unitTesting.model.InvoiceQuery.InvoiceResponse;
 import com.restUnitTesting.unitTesting.service.imp.InvoiceServiceImp;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,6 +19,7 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.client.match.MockRestRequestMatchers;
 import org.springframework.util.ResourceUtils;
 import org.springframework.util.StreamUtils;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.io.FileInputStream;
 import java.nio.charset.Charset;
@@ -42,7 +43,7 @@ public class InvoiceServiceTest {
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    private InvoiceQueryInfo responseInvoiceResponseEntity;
+    private InvoiceResponse responseInvoiceResponseEntity;
 
     @Value("${invoiceInfo.path}")
     private String invoiceUrl;
@@ -54,22 +55,20 @@ public class InvoiceServiceTest {
         final FileInputStream fileInputStream = new FileInputStream(ResourceUtils.getFile("classpath:response_http200.json"));
         final String staticResponse = StreamUtils.copyToString(fileInputStream, Charset.defaultCharset());
 
-        InvoiceQueryInfo mockInvoiceQueryInfo = mapper.readValue(staticResponse, InvoiceQueryInfo.class);
+        InvoiceResponse mockInvoiceResponse = mapper.readValue(staticResponse, InvoiceResponse.class);
 
         this.mockServer.expect(ExpectedCount.once(), requestTo(invoiceUrl
                 + mockPhoneNum))
                 .andExpect(MockRestRequestMatchers.method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.OK)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(mapper.writeValueAsString(mockInvoiceQueryInfo)));
+                        .body(mapper.writeValueAsString(mockInvoiceResponse)));
 
         responseInvoiceResponseEntity = mockService.getInvoiceInfo(mockPhoneNum);
         mockServer.verify();
 
         Assert.assertEquals("200",
                 responseInvoiceResponseEntity.
-                        getInvoiceQueryResponse().
-                        getHeader().
                         getStatusCode());
 
     }
@@ -81,19 +80,38 @@ public class InvoiceServiceTest {
         final FileInputStream fileInputStream = new FileInputStream(ResourceUtils.getFile("classpath:response_http204.json"));
         final String staticResponse = StreamUtils.copyToString(fileInputStream, Charset.defaultCharset());
 
-        InvoiceQueryInfo mockInvoiceQueryInfo = mapper.readValue(staticResponse, InvoiceQueryInfo.class);
+        InvoiceResponse mockInvoiceResponse = mapper.readValue(staticResponse, InvoiceResponse.class);
 
         this.mockServer.expect(ExpectedCount.once(), requestTo(invoiceUrl
                 + mockPhoneNum))
                 .andExpect(MockRestRequestMatchers.method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.OK)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(mapper.writeValueAsString(mockInvoiceQueryInfo)));
+                        .body(mapper.writeValueAsString(mockInvoiceResponse)));
 
         responseInvoiceResponseEntity = mockService.getInvoiceInfo(mockPhoneNum);
         mockServer.verify();
 
-        Assert.assertEquals("204", responseInvoiceResponseEntity.getInvoiceQueryResponse().getHeader().getStatusCode());
+        Assert.assertEquals("204", responseInvoiceResponseEntity.
+                getStatusCode());
+    }
+
+
+    @Test
+    public void testWhenInternalServerError_thenReturnHttp500() throws Exception {
+
+        String mockPhoneNum = "542*******";
+
+        this.mockServer.expect(ExpectedCount.once(), requestTo(invoiceUrl
+                + mockPhoneNum))
+                .andExpect(MockRestRequestMatchers.method(HttpMethod.GET))
+                .andRespond((response) -> { throw new RuntimeException(); });
+
+        responseInvoiceResponseEntity = mockService.getInvoiceInfo(mockPhoneNum);
+        mockServer.verify();
+
+        Assert.assertEquals("500", responseInvoiceResponseEntity.
+                getStatusCode());
     }
 
 }

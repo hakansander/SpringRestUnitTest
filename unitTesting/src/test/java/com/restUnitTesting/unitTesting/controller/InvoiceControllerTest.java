@@ -1,8 +1,10 @@
 package com.restUnitTesting.unitTesting.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.restUnitTesting.unitTesting.model.InvoiceQuery.InvoiceQueryInfo;
+import com.restUnitTesting.unitTesting.model.InvoiceQuery.InvoiceResponse;
+import com.restUnitTesting.unitTesting.model.InvoiceQuery.InvoiceResponse;
 import com.restUnitTesting.unitTesting.service.InvoiceService;
+import com.sun.org.apache.xalan.internal.xsltc.runtime.InternalRuntimeError;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,13 +43,13 @@ public class InvoiceControllerTest {
         final FileInputStream fileInputStream = new FileInputStream(ResourceUtils.getFile("classpath:response_http200.json"));
         final String staticResponse = StreamUtils.copyToString(fileInputStream, Charset.defaultCharset());
 
-        InvoiceQueryInfo mockInvoiceQueryInfo = mapper.readValue(staticResponse, InvoiceQueryInfo.class);
+        InvoiceResponse mockInvoiceResponse = mapper.readValue(staticResponse, InvoiceResponse.class);
 
         when(invoiceService.getInvoiceInfo(mockPhoneNumber))
-                .thenReturn(mockInvoiceQueryInfo);
+                .thenReturn(mockInvoiceResponse);
 
         mockMvc.perform(get("/invoiceQuery/{phoneNumber}", mockPhoneNumber))
-                .andExpect(jsonPath("$.statusCode", is(200)));
+                .andExpect(jsonPath("$.statusCode", is("200")));
 
     }
 
@@ -56,8 +58,16 @@ public class InvoiceControllerTest {
 
         final String mockPhoneNumber = "542*******";
 
+        final FileInputStream fileInputStream = new FileInputStream(ResourceUtils.getFile("classpath:response_http204.json"));
+        final String staticResponse = StreamUtils.copyToString(fileInputStream, Charset.defaultCharset());
+
+        InvoiceResponse mockInvoiceResponse = mapper.readValue(staticResponse, InvoiceResponse.class);
+
+        when(invoiceService.getInvoiceInfo(mockPhoneNumber))
+                .thenReturn(mockInvoiceResponse);
+
         mockMvc.perform(get("/invoiceQuery/{phoneNumber}", mockPhoneNumber))
-                .andExpect(jsonPath("$.statusCode", is(204)));
+                .andExpect(jsonPath("$.statusCode", is("204")));
 
     }
 

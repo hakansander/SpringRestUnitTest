@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     "InvoiceList"
 })
-public class Response {
+public class Data {
 
     @JsonProperty("InvoiceList")
     private List<InvoiceList> invoiceList = null;

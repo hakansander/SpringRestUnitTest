@@ -23,7 +23,7 @@ public class InvoiceServiceImp implements InvoiceService {
         this.restTemplate = restTemplateBuilder.build();
     }
 
-    public InvoiceQueryInfo getInvoiceInfo(String phoneNumber) {
+    public InvoiceResponse getInvoiceInfo(String phoneNumber) {
         try {
             MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
             HttpHeaders requestHeaders = new HttpHeaders();
@@ -31,13 +31,13 @@ public class InvoiceServiceImp implements InvoiceService {
             HttpEntity<?> httpEntity = new HttpEntity<>(body, requestHeaders);
             requestHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-            ResponseEntity<InvoiceQueryInfo> invoiceQueryResponse =
-                    restTemplate.exchange(invoiceInfoPath + phoneNumber, HttpMethod.GET, httpEntity, InvoiceQueryInfo.class);
+            ResponseEntity<InvoiceResponse> invoiceQueryResponse =
+                    restTemplate.exchange(invoiceInfoPath + phoneNumber, HttpMethod.GET, httpEntity, InvoiceResponse.class);
 
             return invoiceQueryResponse.getBody();
         } catch (Exception e) {
-            System.out.println("Thrown the exception:" + e);
-            return null;
+            InvoiceResponse invoiceResponse = new InvoiceResponse(false, "Server error", "Internal Server Error", "500");
+            return invoiceResponse;
         }
     }
 

@@ -1,26 +1,24 @@
 {
-  "InvoiceQueryResponse": {
-    "Header": {
-      "statusCode": "200",
-      "response": "Success"
-    },
-    "Body": {
-      "Response": {
-        "InvoiceList": [
-          {
-            "Id": "35011",
-            "Name": "Bonus Demand Package",
-            "Price": "35.99",
-            "Currency": "TL"
-          },
-          {
-            "Id": "350112",
-            "Name": "Cheap Demand Package",
-            "Price": "10.99",
-            "Currency": "TL"
-          }
-        ]
+  "success": true,
+  "responseMsg": "Successfully returned invoice list",
+  "statusCode": "200",
+  "response": "Success",
+  "data": {
+    "InvoiceList": [
+      {
+        "Id": "35011",
+        "Name": "Bonus Demand Tariff Package",
+        "Price": "35.99",
+        "Currency": "TL"
+      },
+      {
+        "Id": "350112",
+        "Name": "Cheap Tariff Package",
+        "Price": "10.99",
+        "Currency": "TL"
       }
-    }
+    ]
   }
 }
+
+

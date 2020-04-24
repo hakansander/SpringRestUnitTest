@@ -1,9 +1,7 @@
 {
-  "InvoiceQueryResponse": {
-    "Header": {
-      "statusCode": "204",
-      "response": "No data found"
-    },
-    "Body": null
-  }
+  "success": false,
+  "responseMsg": "No invoice data found for given phone number",
+  "statusCode": "204",
+  "response": "NO_CONTENT",
+  "data": {}
 }
