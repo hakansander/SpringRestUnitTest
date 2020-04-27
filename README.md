@@ -1,8 +1,9 @@
 # SpringRestUnitTest
 This repository has been created for the medium blog "Unit Testing Tutorial For RESTful Web Services in Spring Boot".
 
-You can reach the medium blog through the following link:
-https://medium.com/swlh/unit-testing-in-spring-boot-for-restful-web-services-b7dcab3c569
+## Medium Article
+You can reach the medium article through the following link:
+- https://medium.com/swlh/unit-testing-in-spring-boot-for-restful-web-services-b7dcab3c569
 
 In this tutorial, I have explained unit testing approaches of Spring Boot applications for RESTful web services.
 
